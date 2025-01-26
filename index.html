@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="star.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scientific Calculator - Engineer's Toolkit</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+
+      body {
+        font-family: "Roboto", sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #1a1a1a;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+      .heading {
+        font-size: 2.5em;
+        color: #ff0000; /* Updated color */
+        text-align: center;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000; /* Updated color */
+        }
+        to {
+          text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000; /* Updated color */
+        }
+      }
+      .subheading {
+        font-size: 1.2em;
+        color: #a0a0a0;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .calculator {
+        background-color: #2a2a2a;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+        padding: 20px;
+        width: 340px;
+      }
+      #display {
+        width: 100%;
+        height: 60px;
+        font-size: 24px;
+        text-align: right;
+        margin-bottom: 10px;
+        padding: 5px;
+        border: none;
+        background-color: #3a3a3a;
+        color: #ffffff;
+        border-radius: 5px;
+      }
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+      }
+      button {
+        padding: 15px 10px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.1s;
+        background-color: #3a3a3a;
+        color: #ffffff;
+      }
+      button:hover {
+        background-color: #4a4a4a;
+      }
+      button:active {
+        transform: scale(0.95);
+      }
+      .operator {
+        background-color: #4caf50;
+      }
+      .operator:hover {
+        background-color: #45a049;
+      }
+      .equals {
+        background-color: #ff9800;
+        color: white;
+      }
+      .equals:hover {
+        background-color: #f57c00;
+      }
+      .clear {
+        background-color: #f44336;
+        color: white;
+      }
+      .clear:hover {
+        background-color: #d32f2f;
+      }
+      .function {
+        background-color: #2196f3;
+      }
+      .function:hover {
+        background-color: #1e88e5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="heading">Scientific Calculator</h1>
+    <p class="subheading">Engineer's Toolkit</p>
+    <div class="calculator">
+      <input type="text" id="display" readonly />
+      <div class="buttons">
+        <button class="function" onclick="mathFunction('sin')">sin</button>
+        <button class="function" onclick="mathFunction('cos')">cos</button>
+        <button class="function" onclick="mathFunction('tan')">tan</button>
+        <button class="function" onclick="mathFunction('log')">log</button>
+        <button class="function" onclick="mathFunction('ln')">ln</button>
+
+        <button class="function" onclick="mathFunction('asin')">asin</button>
+        <button class="function" onclick="mathFunction('acos')">acos</button>
+        <button class="function" onclick="mathFunction('atan')">atan</button>
+        <button class="function" onclick="mathFunction('sqrt')">√</button>
+        <button class="function" onclick="mathFunction('exp')">exp</button>
+
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button class="operator" onclick="appendToDisplay('/')">/</button>
+        <button class="function" onclick="mathFunction('pow')">x^y</button>
+
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button class="operator" onclick="appendToDisplay('*')">*</button>
+        <button onclick="appendToDisplay('(')">(</button>
+
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button class="operator" onclick="appendToDisplay('-')">-</button>
+        <button onclick="appendToDisplay(')')">)</button>
+
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('.')">.</button>
+        <button class="equals" onclick="calculate()">=</button>
+        <button class="operator" onclick="appendToDisplay('+')">+</button>
+        <button class="function" onclick="mathConstant('pi')">π</button>
+
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button class="function" onclick="mathConstant('e')">e</button>
+        <button onclick="backspace()">⌫</button>
+        <button class="function" onclick="toggleSign()">±</button>
+        <button class="function" onclick="percent()">%</button>
+      </div>
+    </div>
+
+    <script>
+      function appendToDisplay(value) {
+        document.getElementById("display").value += value;
+      }
+
+      function clearDisplay() {
+        document.getElementById("display").value = "";
+      }
+
+      function calculate() {
+        try {
+          const expression = document
+            .getElementById("display")
+            .value.replace(/sin/g, "Math.sin")
+            .replace(/cos/g, "Math.cos")
+            .replace(/tan/g, "Math.tan")
+            .replace(/log/g, "Math.log10")
+            .replace(/ln/g, "Math.log")
+            .replace(/sqrt/g, "Math.sqrt")
+            .replace(/exp/g, "Math.exp")
+            .replace(/asin/g, "Math.asin")
+            .replace(/acos/g, "Math.acos")
+            .replace(/atan/g, "Math.atan")
+            .replace(/π/g, "Math.PI")
+            .replace(/e(?![^(]*\))/g, "Math.E");
+          const result = eval(expression);
+          document.getElementById("display").value = result;
+        } catch (error) {
+          document.getElementById("display").value = "Error";
+        }
+      }
+
+      function mathFunction(func) {
+        const display = document.getElementById("display");
+        if (func === "pow") {
+          display.value += "^";
+        } else {
+          display.value += func + "(";
+        }
+      }
+
+      function mathConstant(constant) {
+        const display = document.getElementById("display");
+        if (constant === "pi") {
+          display.value += "π";
+        } else if (constant === "e") {
+          display.value += "e";
+        }
+      }
+
+      function backspace() {
+        const display = document.getElementById("display");
+        display.value = display.value.slice(0, -1);
+      }
+
+      function toggleSign() {
+        const display = document.getElementById("display");
+        if (display.value !== "" && display.value !== "Error") {
+          if (display.value.startsWith("-")) {
+            display.value = display.value.slice(1);
+          } else {
+            display.value = "-" + display.value;
+          }
+        }
+      }
+
+      function percent() {
+        const display = document.getElementById("display");
+        if (display.value !== "" && display.value !== "Error") {
+          display.value = parseFloat(display.value) / 100;
+        }
+      }
+    </script>
+  </body>
+</html>
